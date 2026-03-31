@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "description": "Sample pandemic dataset for Pandemic Digital Twin Simulator",
+    "source": "Synthetic data based on real-world patterns",
+    "regions": ["delhi", "mumbai", "new_york", "london", "tokyo", "sao_paulo"],
+    "version": "1.0.0"
+  },
+  "disease_parameters": {
+    "covid19": {
+      "name": "COVID-19 (Alpha)",
+      "beta": 0.35,
+      "sigma": 0.196,
+      "gamma": 0.0714,
+      "mu": 0.008,
+      "r0_range": [2.0, 3.5],
+      "incubation_days": 5.1,
+      "infectious_days": 14
+    },
+    "influenza_h1n1": {
+      "name": "Influenza H1N1",
+      "beta": 0.28,
+      "sigma": 0.50,
+      "gamma": 0.25,
+      "mu": 0.001,
+      "r0_range": [1.4, 1.6],
+      "incubation_days": 2,
+      "infectious_days": 4
+    },
+    "measles": {
+      "name": "Measles",
+      "beta": 0.95,
+      "sigma": 0.125,
+      "gamma": 0.143,
+      "mu": 0.002,
+      "r0_range": [12.0, 18.0],
+      "incubation_days": 8,
+      "infectious_days": 7
+    }
+  },
+  "intervention_effectiveness": {
+    "full_lockdown": {
+      "transmission_reduction": 0.75,
+      "mobility_reduction": 0.70,
+      "economic_cost_pct_gdp": 8.5,
+      "duration_weeks": 4,
+      "historical_examples": ["Wuhan 2020", "Italy 2020", "New Zealand 2020"]
+    },
+    "partial_lockdown": {
+      "transmission_reduction": 0.50,
+      "mobility_reduction": 0.45,
+      "economic_cost_pct_gdp": 4.0,
+      "duration_weeks": 6
+    },
+    "vaccination_rollout": {
+      "transmission_reduction": 0.65,
+      "herd_immunity_threshold": 0.67,
+      "economic_cost_per_dose_usd": 15,
+      "duration_weeks": 12
+    },
+    "school_closure": {
+      "transmission_reduction": 0.25,
+      "mobility_reduction": 0.15,
+      "economic_cost_pct_gdp": 1.5,
+      "duration_weeks": 6
+    }
+  },
+  "historical_waves": {
+    "wave_1_2020": {
+      "start_month": "March 2020",
+      "peak_month": "April 2020",
+      "duration_weeks": 12,
+      "global_cases": 2000000
+    },
+    "wave_2_2020": {
+      "start_month": "October 2020",
+      "peak_month": "December 2020",
+      "duration_weeks": 16,
+      "global_cases": 80000000
+    },
+    "wave_delta_2021": {
+      "start_month": "July 2021",
+      "peak_month": "September 2021",
+      "r0": 5.8,
+      "duration_weeks": 12
+    },
+    "wave_omicron_2022": {
+      "start_month": "December 2021",
+      "peak_month": "January 2022",
+      "r0": 8.2,
+      "duration_weeks": 8,
+      "severity": "lower_than_delta"
+    }
+  }
+}
