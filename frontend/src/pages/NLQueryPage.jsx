@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { MessageSquare, Send, Cpu, User, RefreshCw } from 'lucide-react'
+import { MessageSquare, Send, Cpu, User, RefreshCw, Clock } from 'lucide-react'
 import { agentService, scenarioService, regionService } from '../services/api.js'
 
 const fmt = n => {

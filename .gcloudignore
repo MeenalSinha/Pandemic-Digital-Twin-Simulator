@@ -1,0 +1,14 @@
+.gcloudignore
+.git
+.gitignore
+node_modules/
+dist/
+build/
+.venv/
+venv/
+env/
+__pycache__/
+*.sqlite
+*.db
+# But DO NOT ignore .env for the frontend build
+!.env

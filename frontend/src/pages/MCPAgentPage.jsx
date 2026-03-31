@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Bot, Zap, Database, MessageSquare, ChevronRight, Cpu, Play, CheckCircle, AlertCircle } from 'lucide-react'
+import { mcpAgentService } from '../services/api'
 
 const EXAMPLE_QUERIES = [
   "What is the impact of a full lockdown in Delhi?",
@@ -79,28 +80,19 @@ export default function MCPAgentPage() {
     setError(null)
     setStep(1)
 
+    const updateStep = (s) => setStep(curr => Math.max(curr, s))
+
     try {
       // Animate steps
       const stepDelay = ms => new Promise(res => setTimeout(res, ms))
-      stepDelay(600).then(() => setStep(2))
-      stepDelay(1400).then(() => setStep(3))
+      stepDelay(600).then(() => updateStep(2))
+      stepDelay(1200).then(() => updateStep(3))
 
-      const res = await fetch('/mcp-agent', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: queryText }),
-      })
-
-      if (!res.ok) {
-        const errData = await res.json()
-        throw new Error(errData.detail || 'MCP agent request failed')
-      }
-
-      const data = await res.json()
-      setStep(4)
+      const data = await mcpAgentService.run(queryText)
+      updateStep(5)
       setResult(data)
     } catch (e) {
-      setError(e.message || 'Request failed. Make sure the backend is running.')
+      setError(e.friendlyMessage || e.message || 'Request failed. Make sure the backend is running.')
       setStep(0)
     } finally {
       setLoading(false)
@@ -186,7 +178,7 @@ export default function MCPAgentPage() {
           <ChevronRight size={14} color="var(--color-border-strong)" style={{ marginTop: 10 }} />
           <FlowStep number="4" label="Get Structured Data" active={step >= 4} done={step > 4} />
           <ChevronRight size={14} color="var(--color-border-strong)" style={{ marginTop: 10 }} />
-          <FlowStep number="5" label="Generate Response" active={step >= 4} done={step >= 4} />
+          <FlowStep number="5" label="Generate Response" active={step >= 5} done={step >= 5} />
         </div>
       </div>
 

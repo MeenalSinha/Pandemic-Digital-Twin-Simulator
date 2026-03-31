@@ -8,9 +8,7 @@ RUN npm ci --silent
 
 COPY . .
 
-# VITE_API_URL can be overridden at build time (empty = use proxy)
-ARG VITE_API_URL=""
-ENV VITE_API_URL=$VITE_API_URL
+# Vite will pick up VITE_API_URL from the .env file automatically
 
 RUN npm run build
 

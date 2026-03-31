@@ -6,7 +6,7 @@ import axios from 'axios'
  * - In Docker (nginx):     relative /api/* is proxied to http://backend:8000 via nginx.conf
  * - VITE_API_URL env var overrides for non-standard deployments (e.g. Cloud Run with custom domain)
  */
-const BASE_URL = import.meta.env.VITE_API_URL ?? ''
+const BASE_URL = import.meta.env.VITE_API_URL || 'https://pandemic-backend-tyn3bi3fna-uc.a.run.app'
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -59,8 +59,10 @@ export const predictService = {
 }
 
 export const mcpAgentService = {
-  run:    (query) => api.post('/mcp-agent', { query }).then(r => r.data),
-  schema: ()      => api.get('/mcp-agent/schema').then(r => r.data),
+  run:    (query) => api.post('/api/mcp-agent', { query }).then(r => r.data),
+  schema: ()      => api.get('/api/mcp-agent/schema').then(r => r.data),
 }
+
+export const api_health_check = () => api.get('/health').then(r => r.data)
 
 export default api

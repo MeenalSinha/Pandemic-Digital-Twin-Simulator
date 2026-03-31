@@ -100,7 +100,7 @@ app.include_router(rag_router,        prefix="/api/rag",        tags=["RAG / Kno
 app.include_router(realtime_router,   prefix="/api/realtime",   tags=["Real-Time Data"])
 app.include_router(economics_router,  prefix="/api/economics",  tags=["Economics"])
 app.include_router(adaptive_router,   prefix="/api/adaptive",   tags=["Adaptive Learning"])
-app.include_router(mcp_agent_router,  prefix="/mcp-agent",      tags=["MCP Agent"])
+app.include_router(mcp_agent_router,  prefix="/api/mcp-agent",  tags=["MCP Agent"])
 
 
 # ── Health check (required by Cloud Run) ──────────────────────────────────────
@@ -118,7 +118,7 @@ async def root():
         "version": "3.0.0",
         "status": "operational",
         "docs": "/api/docs",
-        "mcp_agent": "/mcp-agent",
+        "mcp_agent": "/api/mcp-agent",
         "health": "/health",
     }
 

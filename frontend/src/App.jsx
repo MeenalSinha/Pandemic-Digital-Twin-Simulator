@@ -12,7 +12,7 @@ import RegionsPage from './pages/RegionsPage.jsx'
 import NLQueryPage from './pages/NLQueryPage.jsx'
 import DemoPage from './pages/DemoPage.jsx'
 import MCPAgentPage from './pages/MCPAgentPage.jsx'
-import { regionService } from './services/api.js'
+import { regionService, api_health_check } from './services/api.js'
 import './App.css'
 
 const NAV_ITEMS = [
@@ -115,8 +115,12 @@ export default function App() {
   const [apiOnline, setApiOnline] = useState(false)
 
   useEffect(() => {
-    fetch('/api/health')
-      .then(r => { if (r.ok) { setApiOnline(true); return regionService.getAll() } throw new Error() })
+    // Check backend health using absolute URL from api.js
+    api_health_check()
+      .then(() => { 
+        setApiOnline(true)
+        return regionService.getAll()
+      })
       .then(d => { if (d?.regions?.length) setRegions(d.regions) })
       .catch(() => setApiOnline(false))
   }, [])
